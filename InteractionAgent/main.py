@@ -9,6 +9,10 @@ import asyncio
 
 load_dotenv()
 
+from lmnr import Laminar
+# this line auto-instruments Browser Use and any browser you use (local or remote)
+Laminar.initialize(os.getenv('LMNR_PROJECT_API_KEY'))
+
 api_key = os.getenv("GEMINI_API_KEY")
 
 # Initialize the model
@@ -29,7 +33,7 @@ config = BrowserContextConfig(
     user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36',
     highlight_elements=True,
     viewport_expansion=500,
-    allowed_domains=[],
+    allowed_domains=["saucedemo.com"],
 )
 
 browser = Browser()
@@ -40,7 +44,7 @@ async def main():
     # Create agent with the model
     agent = Agent(
         browser_context=b_context,
-        task="Open Youtube",
+        task="Find a linkedin account of Giorgi Lomia who works at Google",
         llm=llm)
     result = await agent.run()
     print(result)
