@@ -44,7 +44,7 @@ controller = Controller(output_model=Actions)
 
 async def main(url=None):
     prompt_parser = PromptParser()
-    prompt = prompt_parser.parse_prompt("Prompts/Analysis/prompt_1.txt")
+    prompt = prompt_parser.parse_prompt("Prompts/Analysis/prompt_2.txt")
     if url:
         initial_actions = [
             {'open_tab': {'url': url}}
@@ -66,7 +66,7 @@ async def main(url=None):
         print()
         print()
         print()
-        print(result.final_result)
+        print(result)
         # analyzer = Analyzer()
         # analyzer.cache_output(result.final_result, os.getenv("OUTPUT_PATH"))
         
