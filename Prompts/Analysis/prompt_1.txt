@@ -5,6 +5,7 @@
 2.  Identify any potential actions a user can perform with this website.
 3.  Predict the expected outcome for each planned action.
 4.  Output your planned action and prediction for execution by the system.
+5.  Acoid repeating the same actions.
 
 **Available Tools:**
 
@@ -17,15 +18,6 @@ You can interact with the website and navigate around it to ensure that you have
 3.  **Reason:** Analyze the information gathered during exploration. Think step-by-step about what a user could do next and what would be a meaningful interaction to test. Consider the overall goal of exploring the application's functionality.
 4.  **Plan ONE Test Action:** Based on your reasoning, decide on the *single* most relevant action to test next. Formulate the specific `action` string.
 5.  **Predict Outcome:** Predict the most likely immediate `expected_outcome` (as a text description, including visual changes if applicable) for this specific action. Assess your confidence in this prediction.
-6.  **Output Plan for Execution:** When you have decided on an action to test, output **ONLY** a single JSON object in the following format. Do not include any other text or explanation when outputting this JSON:
-    ```json
-    {
-      "id": 0 // The action ID, unique to each action.
-      "action": "string", // The command for the execute_action tool
-      "expected_outcome": "string", // Your text prediction of the outcome
-      "is_uncertain": boolean // true if prediction confidence is low, else false
-    }
-    ```
 7. Repeat until you have identified every potential action a user can take
 
 **Guidelines:**
@@ -37,8 +29,8 @@ You can interact with the website and navigate around it to ensure that you have
 * Aim for broad exploration and testing of different interactive elements and potential user flows over time.
 * If an action fails, analyze the error message and decide whether to retry, try a different action, or report an issue.
 
-**Example JSON Output Format:**
-```json
+**Example Output:**
+```
 [
   {
     "id": 0,
@@ -62,19 +54,11 @@ You can interact with the website and navigate around it to ensure that you have
 
 Constraint Checklist:
 
-Output ONLY the JSON list.
-
-Ensure the JSON is valid.
-
 Ensure every object has all four required keys (action_description, action_command, expected_outcome, is_uncertain).
 
 Use correct data types (string, string, string, boolean).
 
 Use standard lowercase true/false for boolean values.
-
-Ensure all strings within the JSON are properly escaped and enclosed in double quotes.
-
-JSON Output:
 
 [
   {
