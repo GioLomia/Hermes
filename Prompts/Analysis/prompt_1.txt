@@ -4,8 +4,9 @@
 1.  Understand the page structure and identify potential user interactions by analyzing both visual layout and HTML source code.
 2.  Identify any potential actions a user can perform with this website.
 3.  Predict the expected outcome for each planned action.
-4.  Output your planned action and prediction for execution by the system.
-5.  Acoid repeating the same actions.
+4.  Record each action as your output.
+5.  Avoid repeating the same actions.
+6.  Record as many actions as possible, attempt to comprehensively exhaust the website functionality.
 
 **Available Tools:**
 
@@ -28,43 +29,3 @@ You can interact with the website and navigate around it to ensure that you have
 * Make your `expected_outcome` predictions specific but grounded in the available context. Use `is_uncertain: true` if the outcome is genuinely hard to predict.
 * Aim for broad exploration and testing of different interactive elements and potential user flows over time.
 * If an action fails, analyze the error message and decide whether to retry, try a different action, or report an issue.
-
-**Example Output:**
-```
-[
-  {
-    "id": 0,
-    "action": "Click the visually prominent 'Login' button in the header",
-    "expected_outcome": "A login modal/form should become visible, or the page should navigate to a dedicated login page.",
-    "is_uncertain": true
-  },
-  {
-    "id": 1,
-    "action": "Type a username into the username field identified by placeholder 'Enter username'",
-    "expected_outcome": "The text 'test_user' should appear visually within the username input field.",
-    "is_uncertain": true
-  },
-  {
-    "id": 2,
-    "action": "Click the 'Forgot Password?' link located below the login form",
-    "expected_outcome": "User should be navigated to a page related to password recovery, visually confirming the URL or page title change.",
-    "is_uncertain": false
-  }
-]
-
-Constraint Checklist:
-
-Ensure every object has all four required keys (action_description, action_command, expected_outcome, is_uncertain).
-
-Use correct data types (string, string, string, boolean).
-
-Use standard lowercase true/false for boolean values.
-
-[
-  {
-    "id": ...
-    "action": ...
-    "expected_outcome": ...
-    "is_uncertain": ...
-  }
-]

@@ -61,13 +61,18 @@ async def main(url=None):
             llm=llm,
             controller=controller,
             initial_actions=initial_actions,
-            
-            )
-        result = await agent.run(max_steps=10)
-        await b_context.close()
+        )
+        result = await agent.run(max_steps=5)
+        print()
+        print()
+        print()
         print(result.final_result)
         # analyzer = Analyzer()
         # analyzer.cache_output(result.final_result, os.getenv("OUTPUT_PATH"))
+        
+        # Ensure proper cleanup order
+        await b_context.close()  # Then close browser context
+        await browser.close()  # Finally close browser
 
     else:
         print(prompt)
