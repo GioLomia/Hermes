@@ -43,7 +43,7 @@ class TesterAgent:
         self.agent = Agent(
             browser_context=self.browser_context,
             llm=self.llm,
-            task = "",
+            task="",
             controller=self.controller,
         )
         self.prompt_context = prompt_context_path

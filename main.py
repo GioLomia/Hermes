@@ -22,7 +22,7 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 # Initialize the model
 llm = ChatGoogleGenerativeAI(
-    model="gemini-2.0-flash-exp", api_key=SecretStr(os.getenv("GEMINI_API_KEY"))
+    model="gemini-2.5-pro-exp-03-25", api_key=SecretStr(os.getenv("GEMINI_API_KEY"))
 )
 
 # Basic configuration
@@ -48,7 +48,7 @@ action_controller = Controller(output_model=Actions)
 async def main(url=None):
     prompt_parser = PromptParser()
     context = prompt_parser.parse_prompt("Prompts/Analysis/context.txt")
-    prompt = "order 10 items from the website"
+    prompt = "Buy 10 backpack"
     full_prompt = f"{context}\n{prompt}"
     if url:
         initial_actions = [{"open_tab": {"url": url}}]
