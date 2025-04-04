@@ -2,7 +2,7 @@ import os
 import tempfile
 import unittest
 
-from prompt_parser import PromptParser
+from prompt_parser.prompt_parser import PromptParser
 
 
 class TestPromptParser(unittest.TestCase):
