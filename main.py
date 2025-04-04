@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from pydantic import SecretStr
 
-from interaction_agent.analyzer import Actions, Analyzer, Issues
+from interaction_agent.analyzer import Actions, Issues
 from prompt_parser.prompt_parser import PromptParser
 
 load_dotenv()
@@ -26,7 +26,7 @@ llm = ChatGoogleGenerativeAI(
 )
 
 # Basic configuration
-config = BrowserConfig(headless=False, disable_security=False)
+# config = BrowserConfig(headless=False, disable_security=False)
 
 config = BrowserContextConfig(
     cookies_file="path/to/cookies.json",
