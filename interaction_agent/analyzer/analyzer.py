@@ -3,27 +3,32 @@ import os
 from typing import List
 
 from pydantic import BaseModel
+from interaction_agent.result.agent_result import AgentResult
 
 
 class Action(BaseModel):
-    description: str
-    steps: List[str]
+    def __init__(self) -> None:
+        self.description: str
+        self.steps: List[str]
 
 
-class Actions(BaseModel):
-    actions: List[Action]
+class Actions(AgentResult):
+    def __init__(self) -> None:
+        self.actions: List[Action]
 
 
 class Issue(BaseModel):
-    success: bool
-    description: str
-    steps_to_reproduce: str
-    expected_outcome: str
-    actual_outcome: str
+    def __init__(self) -> None:
+        self.success: bool
+        self.description: str
+        self.steps_to_reproduce: str
+        self.expected_outcome: str
+        self.actual_outcome: str
 
 
-class Issues(BaseModel):
-    actions: List[Issue]
+class Issues(AgentResult):
+    def __init__(self) -> None:
+        self.actions: List[Issue]
 
 
 class Analyzer:

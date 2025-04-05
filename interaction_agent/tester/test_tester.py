@@ -63,7 +63,7 @@ def mock_agent():
 @patch("interaction_agent.tester.tester.Browser")
 @patch("interaction_agent.tester.tester.PromptParser")
 @patch("interaction_agent.tester.tester.ChatGoogleGenerativeAI")
-def tester_instance(
+async def tester_instance(
     MockChatGoogleGenerativeAI,
     MockPromptParser,
     MockBrowser,
@@ -79,18 +79,19 @@ def tester_instance(
     MockBrowser.return_value = mock_browser
     MockBrowserContext.return_value = mock_browser_context
 
-    # Ensure the API key environment variable is set if Tester relies on it directly
-    # os.environ["GEMINI_API_KEY"] = "test_key" # Already handled by mock_env_vars
-
     tester = Tester(model="test-model", context_prompt_path="dummy_path.txt")
-    # Allow re-assigning mocks if needed within tests, though ideally use the patch context
     tester.llm = mock_llm
     tester.prompt_context = mock_prompt_parser.parse_prompt.return_value
     tester.browser_context = mock_browser_context
-    # Mock the internal browser instance if necessary, though BrowserContext mock might suffice
-    # tester.browser_context.browser = mock_browser
+    # tester.browser_context.browser = mock_browser # Assign mock browser to context if needed
 
-    return tester
+    yield tester  # Yield the tester instance to the test
+
+    # --- Cleanup ---
+    # Explicitly await close on mocked async resources after the test runs
+    # This might help asyncio's cleanup process
+    await mock_browser_context.close()
+    await mock_browser.close()
 
 
 # --- Test Cases Will Go Here ---
